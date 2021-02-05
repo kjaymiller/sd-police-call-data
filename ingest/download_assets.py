@@ -13,7 +13,9 @@ async def download_file(filename):
 
 
 async def write_file(filename, content):
-    Path("assets").joinpath(filename.split("/")[-1]).write_bytes(content)
+    filepath = Path("assets").joinpath(filename.split("/")[-1])
+    filepath.write_bytes(content)
+    print(filepath, 'written')
 
 
 async def get_files(filename):
@@ -36,7 +38,8 @@ def load_many(files: List[str], filename, data_group):
     """
     with open(filename) as fp:
         json_data = json.load(fp)
-    return [json_data[data_group][data_name] for data_name in files]
+    data_files = [json_data[data_group][data_name] for data_name in files]
+    return data_files
 
 
 async def load_queue(queue_files):

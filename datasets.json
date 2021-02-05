@@ -6,6 +6,7 @@
         "2018": "http://seshat.datasd.org/pd/pd_calls_for_service_2018_datasd.csv",
         "2019": "http://seshat.datasd.org/pd/pd_calls_for_service_2019_datasd.csv",
         "2020": "http://seshat.datasd.org/pd/pd_calls_for_service_2020_datasd.csv",
+        "2021": "https://seshat.datasd.org/pd/pd_calls_for_service_2021_datasd.csv",
         "mapData": "https://opendata.arcgis.com/datasets/025e5db8bd1f4c14a75340e3daa40977_0.geojson"
     },
 

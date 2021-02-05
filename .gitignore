@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 assets
 .DS_Store
+.envrc

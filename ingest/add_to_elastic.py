@@ -2,15 +2,22 @@ from elasticsearch import Elasticsearch
 from download_assets import download
 from pathlib import Path
 from progress.bar import Bar
+import asyncio
 import click
 import eland as ed
 import pandas as pd
+import json
 import os
 
 client = Elasticsearch(
     hosts=[os.environ["ELASTICSEARCH_HOST"]],  # for local instance
 )
 
+
+call_types = pd.read_csv(
+    "assets/pd_cfs_calltypes_datasd.csv",
+    keep_default_na=False,
+)
 
 @click.group()
 def cli():
@@ -51,11 +58,13 @@ def ingest(filepaths):
                 parse_dates=["date_time"],
             )
 
+            print(f"{df.count()=}")
             df["beat"] = df["beat"].apply(convert_floats_to_ints)
             df["priority"] = df["priority"].apply(strip_priority)
+            df_w_call_type = pd.merge(df, call_types[['call_type','description']], on="call_type", how="left").fillna('').drop_duplicates('incident_num')
 
             ed.pandas_to_eland(
-                df,
+                df_w_call_type,
                 es_client=client,
                 es_dest_index=Path(filepath).stem,
                 es_if_exists="replace",
@@ -71,7 +80,7 @@ def ingest(filepaths):
 
 
 @cli.command()
-@click.argument("dataset_name", nargs=-1)
+@click.argument("dataset_names", nargs=-1)
 @click.option(
     "-f",
     "--filename",
@@ -79,18 +88,24 @@ def ingest(filepaths):
     type=click.Path(exists=True),
     default="datasets.json",
 )
-@click.option("-i", "--floats-to-ints", is_flag=True)
 @click.option("--data_group", default="datasets")
-def download_and_update(dataset_name, filename, data_group, floats_to_ints):
-    download(dataset_name, filename, data_group, floats_to_ints)
+def download_and_update(dataset_names, filename, data_group):
+    assets = download(dataset_names, filename, data_group)
+
+    filepaths= []
+    print(filepaths)
 
     with open(filename) as fp:
         json_data = json.load(fp)
-    filepath = Path("assets").joinpath(
-        Path(json_data["datasets"][dataset_name[0]].name)
-    )
 
-    ingest_one(filepath, floats_to_ints)
+    for dataset_name in dataset_names:
+        print(dataset_name)
+        filepath = Path("assets").joinpath(
+                filepaths.append(Path(json_data[data_group][dataset_name]))
+            )
+
+    print(filepaths)
+    ingest(filepaths)
 
 
 if __name__ == "__main__":
