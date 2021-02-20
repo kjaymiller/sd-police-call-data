@@ -19,11 +19,6 @@ call_types = pd.read_csv(
     keep_default_na=False,
 )
 
-@click.group()
-def cli():
-    pass
-
-
 def convert_floats_to_ints(val):
     try:
         return int(float(val))
@@ -40,7 +35,7 @@ def strip_priority(val):
         return val
 
 
-@cli.command()
+@click.command()
 @click.argument("filepaths", type=click.Path(exists=True), nargs=-1)
 def ingest(filepaths):
     with Bar(
@@ -79,34 +74,5 @@ def ingest(filepaths):
             )
 
 
-@cli.command()
-@click.argument("dataset_names", nargs=-1)
-@click.option(
-    "-f",
-    "--filename",
-    "filename",
-    type=click.Path(exists=True),
-    default="datasets.json",
-)
-@click.option("--data_group", default="datasets")
-def download_and_update(dataset_names, filename, data_group):
-    assets = download(dataset_names, filename, data_group)
-
-    filepaths= []
-    print(filepaths)
-
-    with open(filename) as fp:
-        json_data = json.load(fp)
-
-    for dataset_name in dataset_names:
-        print(dataset_name)
-        filepath = Path("assets").joinpath(
-                filepaths.append(Path(json_data[data_group][dataset_name]))
-            )
-
-    print(filepaths)
-    ingest(filepaths)
-
-
 if __name__ == "__main__":
-    cli()
+    ingest()
