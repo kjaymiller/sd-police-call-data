@@ -1,17 +1,11 @@
-from elasticsearch import Elasticsearch
 from download_assets import download
+from connection import client
 from pathlib import Path
 from progress.bar import Bar
-import asyncio
 import click
 import eland as ed
 import pandas as pd
 import json
-import os
-
-client = Elasticsearch(
-    hosts=[os.environ["ELASTICSEARCH_HOST"]],  # for local instance
-)
 
 
 call_types = pd.read_csv(

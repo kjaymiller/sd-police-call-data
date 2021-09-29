@@ -4,7 +4,7 @@ Ingest, Map and Observe Police Call Data
 ## Ingest
 ### Download datasets
 
-You can find the datasets for police call records for each year at the San Diego Open Data Portal.
+You can find the datasets for police call records for each year at the [San Diego Open Data Portal](https://data.sandiego.gov/datasets/police-calls-for-service/).
 
 I've also created an `assets.json` with links to the datasets.
 

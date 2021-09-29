@@ -13,7 +13,7 @@ async def download_file(filename):
 
 
 async def write_file(filename, content):
-    filepath = Path("assets").joinpath(filename.split("/")[-1])
+    filepath = Path("assets", Path(filename).name)
     filepath.write_bytes(content)
     print(filepath, 'written')
 
@@ -58,7 +58,7 @@ async def load_queue(queue_files):
     type=click.Path(exists=True),
     default="datasets.json",
 )
-@click.option("--data_group", default="datasets")
+@click.option("--data-group", default="datasets")
 def download(dataset_name, filename, data_group):
     if dataset_name:
         queue = load_many(
