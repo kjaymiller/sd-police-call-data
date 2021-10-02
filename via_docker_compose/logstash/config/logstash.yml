@@ -1,0 +1,9 @@
+# Set Automatic Reload to True
+# Disable Elasticsearch monitoring
+# Set Path for logs and json format
+http.host: "0.0.0.0"
+config.reload.automatic: true
+config.reload.interval: 3s
+# xpack.monitoring.elasticsearch.url: http://elasticsearch:9200
+path.logs: "/usr/share/logstash/logs"
+log.format: "json"

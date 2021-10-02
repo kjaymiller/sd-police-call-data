@@ -1,0 +1,16 @@
+{
+    "datasets": {
+        "2015": "http://seshat.datasd.org/pd/pd_calls_for_service_2015_datasd_v1.csv",
+        "2016": "http://seshat.datasd.org/pd/pd_calls_for_service_2016_datasd_v1.csv",
+        "2017": "http://seshat.datasd.org/pd/pd_calls_for_service_2017_datasd_v1.csv",
+        "2018": "http://seshat.datasd.org/pd/pd_calls_for_service_2018_datasd.csv",
+        "2019": "http://seshat.datasd.org/pd/pd_calls_for_service_2019_datasd.csv",
+        "2020": "http://seshat.datasd.org/pd/pd_calls_for_service_2020_datasd.csv",
+        "2021": "https://seshat.datasd.org/pd/pd_calls_for_service_2021_datasd.csv",
+        "mapData": "https://opendata.arcgis.com/datasets/025e5db8bd1f4c14a75340e3daa40977_0.geojson",
+        "Police Calls for Service Dictionary": "http://seshat.datasd.org/pd/pd_calls_for_service_dictionary_datasd.csv",
+        "Police Call for Service Types": "http://seshat.datasd.org/pd/pd_cfs_calltypes_datasd.csv",
+        "Police Calls for Service Disposition Codes": "https://data.sandiego.gov/datasets/police-calls-disposition-codes/",
+        "Police Priority Codes": "http://seshat.datasd.org/pd/pd_cfs_priority_defs_datasd.pdf"
+    }
+}

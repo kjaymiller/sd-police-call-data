@@ -1,0 +1,15 @@
+# This file is where you define your pipelines. You can define multiple.
+# For more information on multiple pipelines, see the documentation:
+#   https://www.elastic.co/guide/en/logstash/current/multiple-pipelines.html
+
+# - pipeline.id: test
+#  path.config: "/usr/share/logstash/pipeline/test_conf.conf"
+#  pipeline.workers: 1
+
+pipeline.id: historical
+path.config: "/usr/share/logstash/pipeline/police_call_history.conf"
+pipeline.workers: 1
+
+- pipeline.id: main
+  path.config: "/usr/share/logstash/pipeline/police_call_poller.conf"
+  pipeline.workers: 1
